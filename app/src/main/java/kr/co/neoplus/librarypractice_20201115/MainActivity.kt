@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
         firstImg.setOnClickListener {
 
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
-            myIntent.putExtra("src", "\"http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
+            myIntent.putExtra("src", "http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
             startActivity(myIntent)
         }
 
