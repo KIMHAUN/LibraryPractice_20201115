@@ -17,11 +17,14 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
         viewPhotoBtn.setOnClickListener {
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
+            myIntent.putExtra("src", "@drawable/iu")
             startActivity(myIntent)
         }
 
         firstImg.setOnClickListener {
+
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
+            myIntent.putExtra("src", "\"http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
             startActivity(myIntent)
         }
 
@@ -29,7 +32,7 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
         Glide.with(mContext).load("http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg").into(firstImg)
-        Glide.with(mContext).load("https://i.ytimg.com/vi/4Ajru7bXxU0/maxresdefault.jpg").into(firstImg)
+        Glide.with(mContext).load("https://i.ytimg.com/vi/4Ajru7bXxU0/maxresdefault.jpg").into(secondImg)
 
     }
 }
