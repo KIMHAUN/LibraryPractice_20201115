@@ -48,7 +48,7 @@ class MainActivity : BaseActivity() {
             //가이드북을 들고 실제로 권한 체크 실행.
             TedPermission.with(mContext)
                 .setPermissionListener(pl)
-                .setDeniedMessage("전화 권한 거부")
+                .setDeniedMessage("전화 권한을 거부하면 연결이 불가합니다. [설정]에서 권한을 켜주세요.")
                 .setPermissions(android.Manifest.permission.CALL_PHONE)
                 .check()
 
@@ -58,15 +58,15 @@ class MainActivity : BaseActivity() {
         }
         viewPhotoBtn.setOnClickListener {
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
-            myIntent.putExtra("src", "@drawable/iu")
+            myIntent.putExtra("src", "https://mblogthumb-phinf.pstatic.net/MjAxOTExMjlfMjA3/MDAxNTc0OTc2Nzg1MzMy.WJhzcrbtitmAgLJDtqwebCR1hDQbxcQUPvAvdxpk5O8g.vCs9wsVGbokP2KX1LUkr4hXoeEkRZYTzGkSGmFNeZ7og.JPEG.pomon64/iumini5mvkbk_201.jpg?type=w800")
             startActivity(myIntent)
         }
 
         firstImg.setOnClickListener {
 
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
-            val myUri = Uri.parse("http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
-            myIntent.putExtra("src", myUri)
+            val src = "http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg"
+            myIntent.putExtra("src", src)
             startActivity(myIntent)
         }
 
