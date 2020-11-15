@@ -1,6 +1,7 @@
 package kr.co.neoplus.librarypractice_20201115
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -15,6 +16,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        callBtn.setOnClickListener {
+            //ACTION_CALL을 이용해서 바로 전화 연결 - 권한 획득 처리 같이 진행
+            val myUri = Uri.parse("tel:010-1234-5678")
+            val myIntent = Intent(Intent.ACTION_CALL, myUri)
+            startActivity(myIntent)
+
+        }
         viewPhotoBtn.setOnClickListener {
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
             myIntent.putExtra("src", "@drawable/iu")
