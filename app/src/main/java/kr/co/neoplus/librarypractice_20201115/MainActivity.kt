@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.gun0912.tedpermission.PermissionListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -19,9 +21,29 @@ class MainActivity : BaseActivity() {
 
         callBtn.setOnClickListener {
             //ACTION_CALL을 이용해서 바로 전화 연결 - 권한 획득 처리 같이 진행
-            val myUri = Uri.parse("tel:010-1234-5678")
-            val myIntent = Intent(Intent.ACTION_CALL, myUri)
-            startActivity(myIntent)
+            //tedPermission라이브러리 활용
+
+            //권한 상태에 따른 행동 요령(가이드북-Listener) 작성
+
+            //object : 가이드북을 담기 위한 임시 (익명) 클래스
+            // :PermissionListener :object가 어떤 종류의 가이드북을 담는지
+            val pl = object : PermissionListener{
+
+                //권한이 승인됐을 때 -> 전화 연결
+                override fun onPermissionGranted() {
+                    val myUri = Uri.parse("tel:010-1234-5678")
+                    val myIntent = Intent(Intent.ACTION_CALL, myUri)
+                    startActivity(myIntent)
+                }
+
+                //거부 됐을 때-> 통화연결 불가 토스트
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Toast.makeText(mContext, "권한이 거부되어 통화연결이 불가능합니다.", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+
 
         }
         viewPhotoBtn.setOnClickListener {
@@ -33,7 +55,8 @@ class MainActivity : BaseActivity() {
         firstImg.setOnClickListener {
 
             val myIntent = Intent(mContext, ViewPhotoActivity::class.java)
-            myIntent.putExtra("src", "http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
+            val myUri = Uri.parse("http://i.ytimg.com/vi/yPoXG50WrHs/maxresdefault.jpg")
+            myIntent.putExtra("src", myUri)
             startActivity(myIntent)
         }
 
